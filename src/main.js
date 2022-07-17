@@ -1,8 +1,24 @@
-import Vue from 'vue'
-import App from './App.vue'
+import "./mock";
+import Vue from 'vue';
+import App from './App.vue';
+import test from './components/Pager/test.vue';
+import "./styles/global.less";
+import router from "./router";
+import showMessage from "./utils/showMessage";
+import store from "./store";
 
-Vue.config.productionTip = false
+store.dispatch("setting/fetchSetting");
+
+Vue.prototype.$showMessage = showMessage;
+import "./eventBus";
+
+import vLoading from "./directives/loading";
+import vLazy from "./directives/lazy";
+Vue.directive("loading", vLoading);
+Vue.directive("lazy", vLazy);
 
 new Vue({
-  render: h => h(App),
+    router,
+    store,
+    render: h => h(App),
 }).$mount('#app')

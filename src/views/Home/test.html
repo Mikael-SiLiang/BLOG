@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        Promise.all = function(array) {
+            return new Promise((resolve, reject) => {
+                let count = 0;
+                const results = [];
+                array.forEach((p, index) => {
+                    p.then((result) => {
+                        count++;
+                        results[index] = result;
+                        if (count === array.length) {
+                            resolve(results);
+                        }
+                    }).catch(reject);
+
+                })
+            })
+
+        }
+
+
+
+
+
+
+
+
+
+
+        Promise.all = function(array) {
+            return new Promise(function(resolve, reject) {
+                let count = 0;
+                const results = [];
+                array.forEach(function(p, index) {
+                    p.then((data) => {
+                        count++;
+                        results[index] = data;
+                        if (count === array.length) {
+                            resolve(results);
+                        }
+                    }).catch(reject);
+                })
+            })
+        }
+
+
+
+        function debounce(func, wait) {
+            let timer = null;
+            return function() {
+                let context = this;
+                let arg = [...arguments];
+                if (timer) {
+                    clearTimeout(timer);
+                    timer = null;
+                }
+                timer = setTimeout(() => {
+                    func.apply(context, arg);
+                }, wait)
+            }
+        }
+
+        function throttle(func, wait) {
+            let timer = null;
+            return function() {
+                let context = this,
+                    arg = [...arguments];
+                if (!timer) {
+                    timer = setTimeout(() => {
+                        func.apply(context, arg);
+                        timer = null;
+                    }, wait)
+                }
+            }
+        }
+
+        Promise.all = function(array) {
+            let count = 0,
+                results = [];
+            return new Promise((resolve, reject) => {
+                array.forEach((p, index) => {
+                    p.then((data) => {
+                        count++;
+                        results[index] = data;
+                        if (count === array.length) {
+                            resolve(results);
+                        }
+                    }).catch(reject)
+                })
+            })
+        }
+
+        function isMatch(str1, str2) {
+            if (str1 === str2) {
+                console.log("true1");
+                return true;
+            } else if (typeof str1 != "string" || typeof str2 != "string") {
+                console.log("false1");
+                return false;
+            } else {
+                var conversionStr1 = conversion(str1);
+                var conversionStr2 = conversion(str2);
+                return comparsion(conversionStr1, conversionStr2);
+
+            }
+        }
+
+        function conversion(str) {
+            var jsonobj = {};
+            var strArray = str.split("");
+            for (var i = 0; i < strArray.length; i++) {
+                if (jsonobj[strArray[i]]) {
+                    ++jsonobj[strArray[i]];
+                } else {
+                    jsonobj[strArray[i]] = 1;
+                }
+            }
+            return jsonobj;
+        }
+
+        function comparsion(obj1, obj2) {
+            var sortObjKey1 = Object.keys(obj1);
+            var sortObjKey2 = Object.keys(obj2);
+            if (sortObjKey1.length !== sortObjKey2.length) {
+                return false;
+            } else {
+                for (var key in obj1) {
+                    if (obj1[key] !== obj2[key]) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+        console.log(isMatch('something', 'ginhtemos')); // true
+        console.log(isMatch('aaa', 'aa')); //false
+        console.log(isMatch('abb', 'baa')); //false
+        console.log(isMatch('hello', 'olelh')); //true
+
+        function isMatch(data1, data2) {
+            let arr1 = [];
+            let arr2 = [];
+            for (let i = 0; i < data1.length; i++) {
+                arr1.push(data1.charAt(i))
+            };
+            for (let i = 0; i < data2.length; i++) {
+                arr2.push(data2.charAt(i))
+            };
+            if (arr1.sort().toString() == arr2.sort().toString()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+
+        function dfs(root, arr) {
+            if (!root) {
+                return null;
+            }
+            arr.push(root);
+            let children = root.children;
+            if (children) {
+                for (let child in children) {
+                    dfs(child, arr)
+                }
+            }
+        }
+
+        function deepTraversals(html) {
+            let arr = [];
+            dfs(html, arr);
+            return arr;
+        }
+
+        Promise.all = function(array) {
+            let count = 0;
+            let results = [];
+            return new Promise((resolve, reject) => {
+                array.forEach((p, index) => {
+                    p.then((data) => {
+                        count++;
+                        results[index] = data;
+                        if (count == array.length) {
+                            resolve(results);
+                        }
+                    }).catch(reject)
+                })
+            })
+        }
+
+        function isMatch(data1, data2) {
+            let arr1 = [],
+                arr2 = [];
+            for (let i = 0; i < data1.length; i++) {
+                arr1.push(data1.charAt(i));
+            };
+            for (let i = 0; i < data2.length; i++) {
+                arr2.push(data2.charAt(i));
+            };
+            if (arr1.sort().toString() === arr2.sort().toString()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+
+        function deepTraversals(root) {
+            let arr = [];
+            dfs(root, arr);
+            return arr;
+        }
+
+        function dfs(html, arr) {
+            if (!html) {
+                return null;
+            };
+            arr.push(html);
+            let children = html.children;
+            if (children) {
+                for (let child in children) {
+                    dfs(child, arr);
+                }
+            }
+        }
+
+        function TreeRender(h) {
+            const mapDom = function(data) {
+                const DATA = JSON.parse(JSON.stringify(data));
+                return DATA.map(item => {
+                    if (item.children) {
+                        return h('li', [item.label, h('ul', mapDom(item.children))])
+                    } else {
+                        return h('li', item.label)
+                    }
+                })
+            };
+            return h('ul', {
+                class: {
+                    person: true
+                }
+            }, mapDom(this.data))
+        }
+    </script>
+</body>
+
+</html>
